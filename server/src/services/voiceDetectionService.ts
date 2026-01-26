@@ -42,8 +42,10 @@ export class VoiceDetectionService {
 
   public decodeBase64Audio(base64String: string): Buffer {
     try {
-      // Remove data URL prefix if present
-      const cleanBase64 = base64String.replace(/^data:audio\/[a-z0-9]+;base64,/, '');
+      // Remove data URL prefix if present and clean whitespace
+      const cleanBase64 = base64String
+        .replace(/^data:audio\/[a-z0-9]+;base64,/, '')
+        .replace(/\s/g, ''); // Remove newlines and spaces
 
       // Validate base64 format
       if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleanBase64)) {
@@ -79,10 +81,15 @@ export class VoiceDetectionService {
 
       return buffer;
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Invalid audio data: ${error.message}`);
+      // Enhanced error detail
+      const errorMessage = error instanceof Error ? error.message : 'Unknown decoding error';
+      logger.error(`Audio decoding failed: ${errorMessage}`);
+
+      if (errorMessage.includes('Invalid base64')) {
+        throw new Error(`Invalid base64 format: ${errorMessage}`);
       }
-      throw new Error('Invalid base64 audio data');
+
+      throw new Error(`Failed to process audio data: ${errorMessage}`);
     }
   }
 
