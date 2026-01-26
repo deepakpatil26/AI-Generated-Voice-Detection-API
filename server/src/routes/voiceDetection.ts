@@ -30,8 +30,9 @@ const voiceDetectionSchema = Joi.object({
       'string.empty': 'language is required',
       'any.required': 'language is required',
       'any.invalid': 'language must be one of: Tamil, English, Hindi, Malayalam, Telugu'
-    })
-});
+    }),
+  audioFormat: Joi.string().optional() // Allow audioFormat from hackathon tester
+}).options({ stripUnknown: true });
 
 router.post('/detect', async (req: Request, res: Response) => {
   try {
