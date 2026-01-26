@@ -1,0 +1,40 @@
+config:
+  target: 'http://localhost:8000'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+    - duration: 120
+      arrivalRate: 10
+    - duration: 60
+      arrivalRate: 20
+
+scenarios:
+  - name: "Health Check"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/health"
+
+  - name: "Voice Detection"
+    weight: 80
+    flow:
+      - post:
+          url: "/api/voice/detect"
+          headers:
+            Content-Type: "application/json"
+            X-API-Key: "your-secret-api-key-change-in-production"
+          json:
+            audioBase64: "dGVzdCBhdWRpbyBkYXRh"
+            language: "English"
+
+  - name: "Debug Analysis"
+    weight: 10
+    flow:
+      - post:
+          url: "/api/debug/analyze"
+          headers:
+            Content-Type: "application/json"
+            X-API-Key: "your-secret-api-key-change-in-production"
+          json:
+            audioBase64: "dGVzdCBhdWRpbyBkYXRh"
+            language: "English"
