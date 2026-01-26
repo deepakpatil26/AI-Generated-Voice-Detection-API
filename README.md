@@ -18,6 +18,12 @@ A full-stack web application that detects whether a voice sample is AI-generated
 - Node.js 16+ and npm
 - Modern web browser
 
+## 🌐 Live Demo
+
+- **Frontend**: [https://ai-voice-detection-api.netlify.app/](https://ai-voice-detection-api.netlify.app/)
+- **Backend API**: [https://ai-voice-detection-api-5hv1.onrender.com](https://ai-voice-detection-api-5hv1.onrender.com)
+- **API Documentation**: [https://ai-voice-detection-api-5hv1.onrender.com/](https://ai-voice-detection-api-5hv1.onrender.com/)
+
 ## 🛠️ Installation
 
 ### Backend Setup
@@ -46,7 +52,7 @@ A full-stack web application that detects whether a voice sample is AI-generated
    npm run dev
    ```
 
-The API will be available at `http://localhost:8000`
+The API will be available at `http://localhost:8000` (or your Render URL in production)
 
 ### Frontend Setup
 
@@ -75,7 +81,7 @@ The API will be available at `http://localhost:8000`
    npm start
    ```
 
-The frontend will be available at `http://localhost:3000`
+The frontend will be available at `http://localhost:3000` (or your Netlify URL in production)
 
 ## 📚 API Documentation
 
@@ -178,23 +184,26 @@ npm test
 
 ## 📦 Deployment
 
-### Backend Deployment (Render.com)
+### Backend Deployment (Render.com) ✅ Live
+
+**URL**: `https://ai-voice-detection-api-5hv1.onrender.com`
 
 1. Push code to GitHub
 2. Connect repository to Render.com
 3. Set environment variables in Render dashboard
 4. Deploy automatically
 
-### Frontend Deployment (Netlify/Vercel)
+### Frontend Deployment (Netlify) ✅ Live
+
+**URL**: `https://ai-voice-detection-api.netlify.app/`
 
 1. Build the React app:
-
    ```bash
    cd client
    npm run build
    ```
-
-2. Deploy the `build` folder to Netlify or Vercel
+2. Deploy to Netlify
+3. Set environment variables (`REACT_APP_API_URL`, `REACT_APP_API_KEY`)
 
 ## 🔒 Security Features
 
