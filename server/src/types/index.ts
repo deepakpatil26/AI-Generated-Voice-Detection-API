@@ -43,6 +43,9 @@ export interface AudioFeatures {
   zcrStd: number;
   rmsMean: number;
   rmsStd: number;
+  entropyMean: number;
+  entropyStd: number;
+  duration: number;
 }
 
 export interface MLModelResponse {

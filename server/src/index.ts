@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Request logging
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     logger.info(`${req.method} ${req.path} - IP: ${req.ip}`);
     next();
 });
@@ -55,7 +55,7 @@ app.use('/api/voice', authMiddleware, voiceDetectionRoutes);
 app.use('/api/debug', debugRoutes);
 
 // Root endpoint
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({
         message: 'AI Voice Detection API',
         version: '1.0.0',
@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
 app.use(errorHandler);
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use('*', (req: Request, res: Response) => {
     res.status(404).json({
         error: 'Endpoint not found',
         code: 'NOT_FOUND'

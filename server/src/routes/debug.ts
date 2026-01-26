@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { VoiceDetectionService } from '../services/voiceDetectionService';
 import { TestValidator } from '../services/testValidation';
 import { logger } from '../utils/logger';
@@ -7,17 +7,17 @@ const router = express.Router();
 const voiceService = new VoiceDetectionService();
 
 // Debug endpoint to analyze audio features
-router.post('/analyze', async (req, res) => {
+router.post('/analyze', async (req: Request, res: Response) => {
   try {
     const { audioBase64, language = 'English' } = req.body;
 
     // Decode and extract features
     const audioBuffer = voiceService.decodeBase64Audio(audioBase64);
     const features = await voiceService.extractAudioFeatures(audioBuffer);
-    
+
     // Get detailed analysis
     const analysis = TestValidator.validateHeuristic(features);
-    
+
     // Log the analysis
     logger.info('Audio analysis:', {
       features,
@@ -50,7 +50,7 @@ router.post('/analyze', async (req, res) => {
 });
 
 // Get verification checklist
-router.get('/checklist', (req, res) => {
+router.get('/checklist', (req: Request, res: Response) => {
   res.json({
     checklist: TestValidator.getVerificationChecklist(),
     note: "This is a heuristic-based demo. For production, use real ML models."
