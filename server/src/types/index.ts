@@ -10,6 +10,15 @@ export interface VoiceDetectionResponse {
   language: string;
   processingTimeMs: number;
   timestamp: string;
+  explainability?: {
+    reasoning: string[];
+    featuresAnalyzed: string[];
+    confidenceBreakdown?: {
+      weightedScore: number;
+      patternScore: number;
+      statisticalScore: number;
+    };
+  };
 }
 
 export interface ErrorResponse {
