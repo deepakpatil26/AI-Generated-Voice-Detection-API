@@ -38,7 +38,7 @@ jobs:
         run: npm test
         env:
           NODE_ENV: test
-          API_KEY: 'test-api-key-for-ci'
+          API_KEY: 'your-secret-api-key-change-in-production'
           MAX_FILE_SIZE_MB: '25'
           CI: true
 
@@ -73,7 +73,7 @@ jobs:
         run: npm test -- --watchAll=false --coverage
         env:
           REACT_APP_API_URL: 'http://localhost:8000'
-          REACT_APP_API_KEY: 'test-api-key-for-ci'
+          REACT_APP_API_KEY: 'your-secret-api-key-change-in-production'
           CI: true
 
       - name: Upload coverage reports
@@ -101,7 +101,7 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
 
-      - name: Upload Trivy scan results
+      - name: Upload CodeQL results
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
